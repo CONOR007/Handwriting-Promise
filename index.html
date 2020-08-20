@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./myPromise4.js"></script>
+</head>
+<body>
+    <script>
+        function P1 () {
+            return new Promise((resolve,reject)=>{
+                resolve('finally')
+            })
+        }
+
+        function P2 () {
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    resolve('hello')
+                },1000)
+            })
+        }
+
+        P1().finally((value)=>{
+            console.log(value)
+            return P2()
+        })
+        .then(value=>console.log(value))
+        .catch(err => {
+            console.log(err)
+            return 100
+        })
+        .then(value=>console.log(value))
+    </script>
+</body>
+</html>
